@@ -24,15 +24,14 @@
                 </div>
                 <p class="profile__profi">Исследователь океана</p>
             </div>
-            <button class="profile__add-button"><img src="./image/addButton.svg" alt=""
-                    class="profile__addButtonImg"></button>
+            <button class="profile__add-button" aria-label="Добавить"></button>
         </section>
         <section class="elements">
             <div class="element">
                 <img src="./image/kirill-pershin-1088404-unsplash.jpg" alt="Карачаевск" class="element__image">
                 <div class="element__info">
-                    <p class="element__attractions">Карачаевск</p>
-                    <img src="./image/like.svg" alt="лайк" class="element__like">
+                    <h2 class="element__attractions">Карачаевск</h2>
+                    <button class="element__like" type="button" aria-label="лайк"></button>
                 </div>
             </div>
             <div class="element">
@@ -75,13 +74,13 @@
     <footer class="footer">
         <p class="footer__paragraph">&#169; 2023 Mesto Russia</p>
     </footer>
-    <section class="pop-app">
-        <div class="pop-app__container">
-            <h3 class="pop-app__title">Редактировать профиль</h3>
-            <form class="pop-app__form" action="editProfile">
-                <input class="pop-app__input" type="text" placeholder="Имя">
-                <input class="pop-app__input" type="text" placeholder="О себе">
-                <input class='pop-app__button' type="button" value="Сохранить">
+    <section class="popup">
+        <div class="popup__container">
+            <h3 class="popup__title">Редактировать профиль</h3>
+            <form class="popup__form" action="editProfile" name="formEditProfile">
+                <input class="popup__input" type="text" placeholder="Имя" name="name">
+                <input class="popup__input" type="text" placeholder="О себе" name="about">
+                <input class='popup__button' value="Сохранить" type="submit">
             </form>
         </div>
     </section>

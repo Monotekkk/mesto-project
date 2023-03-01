@@ -1,3 +1,13 @@
-.element__like{
+.element__like {
     margin-left: 20px;
+    background: none;
+    border: none;
+    background-image: url(../../../image/like.svg);
+    background-repeat: no-repeat;
+    background-size: 22px 22px;
+    background-position: 50%;
+    background-origin: padding-box;
+    width: 22px;
+    height: 19px;
+    cursor: pointer;
 }
