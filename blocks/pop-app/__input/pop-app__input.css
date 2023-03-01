@@ -1,0 +1,13 @@
+.pop-app__input {
+    display: block;
+    margin: 0 auto;
+    width: 358px;
+    margin-bottom: 30px;
+    border: 0;
+    border-bottom: 1px solid #000000;
+    font-family: 'Inter', sans-serif;
+    font-style: normal;
+    font-weight: 400;
+    font-size: 14px;
+    line-height: 17px;
+}

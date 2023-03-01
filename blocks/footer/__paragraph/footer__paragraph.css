@@ -1,0 +1,17 @@
+.footer__paragraph {
+    font-family: 'Inter';
+    font-style: normal;
+    font-weight: 400;
+    font-size: 18px;
+    line-height: 22px;
+    color: #545454;
+    margin: 0;
+    margin-bottom: 60px;
+}
+
+@media screen and (max-width: 879px) {
+    .footer__paragraph {
+        font-size: 14px;
+        line-height: 17px;
+    }
+}

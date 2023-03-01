@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html lang="ru">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Mesto</title>
+    <link rel="stylesheet" href="./pages/index.css">
+</head>
+
+<body class="body">
+    <header class="header">
+        <img src="./image/Vector.svg" alt="" class="header__logo">
+        <hr>
+    </header>
+    <section class="profile">
+        <img src="./image/image.jpg" alt="" class="profile__avatar">
+        <div class="profile__info">
+            <div class="profile__editName">
+                <p class="profile__name">Жак-Ив Кусто</p>
+                <button class="profile__editButton">
+                    <svg width="10" height="10" viewBox="0 0 10 10" fill="none" xmlns="http://www.w3.org/2000/svg">
+                        <path
+                            d="M10 1.32827L2.60377 8.7666L1.28302 7.41936L8.66038 0L10 1.32827ZM0 10L1.96226 9.41177L0.584906 8.08349L0 10Z"
+                            fill="white" />
+                    </svg>
+                </button>
+            </div>
+            <p class="profile__profi">Исследователь океана</p>
+        </div>
+        <button class="profile__addButton"><img src="./image/addButton.svg" alt=""
+                class="profile__addButtonImg"></button>
+    </section>
+    <section class="elements">
+        <div class="element">
+            <img src="./image/kirill-pershin-1088404-unsplash.jpg" alt="Карачаевск" class="element__image">
+            <div class="element__info">
+                <p class="element__attractions">Карачаевск</p>
+                <img src="./image/like.svg" alt="лайк" class="element__like">
+            </div>
+        </div>
+        <div class="element">
+            <img src="./image/kirill-pershin-1404681-unsplash.png" alt="Гора Эльбрус" class="element__image">
+            <div class="element__info">
+                <p class="element__attractions">Гора Эльбрус</p>
+                <img src="./image/like.svg" alt="лайк" class="element__like">
+            </div>
+        </div>
+        <div class="element">
+            <img src="./image/kirill-pershin-1556355-unsplash.png" alt="Домбай" class="element__image">
+            <div class="element__info">
+                <p class="element__attractions">Домбай</p>
+                <img src="./image/like.svg" alt="лайк" class="element__like">
+            </div>
+        </div>
+        <div class="element">
+            <img src="./image/kirill-pershin-1088404-unsplash.jpg" alt="" class="element__image">
+            <div class="element__info">
+                <p class="element__attractions">Гора Эльбрус</p>
+                <img src="./image/like.svg" alt="лайк" class="element__like">
+            </div>
+        </div>
+        <div class="element">
+            <img src="./image/kirill-pershin-1556355-unsplash.png" alt="Домбай" class="element__image">
+            <div class="element__info">
+                <p class="element__attractions">Домбай</p>
+                <img src="./image/like.svg" alt="лайк" class="element__like">
+            </div>
+        </div>
+        <div class="element">
+            <img src="./image/kirill-pershin-1088404-unsplash.jpg" alt="Карачаевск" class="element__image">
+            <div class="element__info">
+                <p class="element__attractions">Карачаево-Черкесия</p>
+                <img src="./image/like.svg" alt="лайк" class="element__like">
+            </div>
+        </div>
+    </section>
+    <footer class="footer">
+        <p class="footer__paragraph">&#169; 2023 Mesto Russia</p>
+    </footer>
+    <section class="pop-app popup_opened">
+        <div class="pop-app__container">
+            <h3 class="pop-app__title">Редактировать профиль</h3>
+            <form class="pop-app__form" action="editProfile">
+                <input class="pop-app__input" type="text" placeholder="Имя">
+                <input class="pop-app__input" type="text" placeholder="О себе">
+                <input class='pop-app__button' type="button" value="Сохранить">
+            </form>
+        </div>
+    </section>
+</body>
+
+</html>

@@ -1,0 +1,33 @@
+@import url(../fonts/fonts.css);
+
+@import url(../blocks/body/body.css);
+
+@import url(../blocks/header/header.css);
+@import url(../blocks/header/__logo/header__logo.css);
+
+@import url(../blocks/profile/profile.css);
+@import url(../blocks/profile/__avatar/profile__avatar.css);
+@import url(../blocks/profile/__info/profile__info.css);
+@import url(../blocks/profile/__name/profile__name.css);
+@import url(../blocks/profile/__profi/profile__profi.css);
+@import url(../blocks/profile/__addButton/profile__addButton.css);
+@import url(../blocks/profile/__addButtonImg/profile__addButtonImg.css);
+@import url(../blocks/profile/__editButton/profile__editButton.css);
+@import url(../blocks/profile/__editButtonImg/profile__editButtonImg.css);
+@import url(../blocks/profile/__editName/profile__editName.css);
+
+@import url(../blocks/elemens/elements.css);
+@import url(../blocks/element/__image/element__image.css);
+@import url(../blocks/element/element.css);
+@import url(../blocks/element/__info/element__info.css);
+@import url(../blocks/element/__like/element__like.css);
+@import url(../blocks/element/__attractions/element__attractions.css);
+
+@import url(../blocks/footer/footer.css);
+@import url(../blocks/footer/__paragraph/footer__paragraph.css);
+
+@import url(../blocks/pop-app/pop-app.css);
+@import url(../blocks/pop-app/__container/pop-app__container.css);
+@import url(../blocks/pop-app/__input/pop-app__input.css);
+@import url(../blocks/pop-app/__button/pop-app__button.css);
+@import url(../blocks/pop-app/__title/pop-app__title.css);

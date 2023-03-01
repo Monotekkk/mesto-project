@@ -1,0 +1,20 @@
+.profile__profi {
+    margin: 0;
+    padding: 0;
+    font-family: 'Inter', sans-serif;
+    font-style: normal;
+    font-weight: 400;
+    font-size: 18px;
+    line-height: 22px;
+    color: #FFFFFF;
+}
+
+@media screen and (max-width:879px) {
+    .profile__profi {
+        font-size: 14px;
+        line-height: 17px;
+        text-align: center;
+        margin-top: 14px;
+        margin-bottom: 36px;
+    }
+}
