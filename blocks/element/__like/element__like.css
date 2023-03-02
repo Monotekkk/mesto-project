@@ -11,3 +11,6 @@
     height: 19px;
     cursor: pointer;
 }
+.element__like:hover{
+    opacity: 0.5;
+}

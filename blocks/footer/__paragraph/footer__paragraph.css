@@ -1,5 +1,5 @@
 .footer__paragraph {
-    font-family: 'Inter';
+    font-family: 'Inter', 'Arial', sans-serif;
     font-style: normal;
     font-weight: 400;
     font-size: 18px;
@@ -11,7 +11,9 @@
 
 @media screen and (max-width: 879px) {
     .footer__paragraph {
+        display: block;
         font-size: 14px;
         line-height: 17px;
+        margin: 0 19px 36px;
     }
 }

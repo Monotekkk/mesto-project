@@ -1,13 +1,21 @@
-.pop-app__button {
+.popup__button {
     width: 358px;
     height: 50px;
     margin: 0 auto;
     background-color: #000;
     color: #fff;
-    font-family: 'Inter';
+    font-family: 'Inter', 'Arial', sans-serif;
     font-style: normal;
     font-weight: 400;
     font-size: 18px;
     line-height: 22px;
     text-align: center;
+    border: 0;
+    border-radius: 2px;
+    cursor: pointer;
+}
+
+.popup__button:hover {
+    opacity: 0.8;
+
 }

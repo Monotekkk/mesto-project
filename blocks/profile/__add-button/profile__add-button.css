@@ -8,6 +8,10 @@
     background-size: 22px 22px;
     background-position:50%;
     background-origin: padding-box;
+    cursor: pointer;
+}
+.profile__add-button:hover{
+    opacity: 0.6;
 }
 @media screen and (max-width: 879px) {
     .profile__add-button{

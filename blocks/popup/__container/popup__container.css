@@ -1,6 +1,7 @@
-.pop-app__container {
+.popup__container {
     width: 430px;
-    height: 330px;
+    min-height: 330px;
+    height: fit-content;
     position: absolute;
     top: 50%;
     left: 50%;
