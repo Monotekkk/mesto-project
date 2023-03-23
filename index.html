@@ -74,7 +74,7 @@
     <footer class="footer">
         <p class="footer__paragraph">&#169; 2023 Mesto Russia</p>
     </footer>
-    <section class="popup popup_opened">
+    <section class="popup popup_edit-profile">
         <div class="popup__container">
             <h3 class="popup__title">Редактировать профиль</h3>
             <form class="popup__form" action="editProfile" name="formEditProfile">
@@ -85,6 +85,18 @@
             <button class="popup__button_close"></button>
         </div>
     </section>
+    <section class="popup popup_add-card">
+        <div class="popup__container">
+            <h3 class="popup__title">Новое место</h3>
+            <form class="popup__form" action="editProfile" name="formEditProfile">
+                <input class="popup__input" type="text" placeholder="Имя" name="name">
+                <input class="popup__input" type="text" placeholder="О себе" name="about">
+                <input class='popup__button' value="Сохранить" type="submit">
+            </form>
+            <button class="popup__button_close"></button>
+        </div>
+    </section>
+    <script src="./index.js"></script>
 </body>
 
 </html>
