@@ -2,6 +2,7 @@
     max-width: 282px;
     background-color: #fff;
     border-radius: 10px;
+    justify-self: center;
 }
 @media screen and (max-width:880px){
     .element{

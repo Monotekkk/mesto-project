@@ -1,7 +1,7 @@
 @import url(../fonts/fonts.css);
 
 @import url(../blocks/body/body.css);
-
+@import url(../blocks/main/main.css);
 @import url(../blocks/header/header.css);
 @import url(../blocks/header/__logo/header__logo.css);
 
@@ -30,3 +30,4 @@
 @import url(../blocks/popup/__input/popup__input.css);
 @import url(../blocks/popup/__button/popup__button.css);
 @import url(../blocks/popup/__title/popup__title.css);
+@import url(../blocks/popup/__button_close/popup__button_close.css);
