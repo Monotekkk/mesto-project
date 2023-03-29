@@ -9,6 +9,7 @@ const closePopupButton = document.querySelectorAll('.popup__button_close'),
     formElement = document.querySelector('.popup__form'),
     addCardButton = document.querySelector('.profile__add-button'),
     elementsContainer = document.querySelector('.elements'),
+    popupImage = document.querySelector('.popup_image'),
     initialCards = [{
             name: 'Архыз',
             link: 'https://pictures.s3.yandex.net/frontend-developer/cards-compressed/arkhyz.jpg'
@@ -38,6 +39,7 @@ const closePopupButton = document.querySelectorAll('.popup__button_close'),
 function closePopup(e) {
     popupEditProfile.classList.remove('popup_opened');
     popupAddCard.classList.remove('popup_opened');
+    popupImage.classList.remove('popup_opened');
 }
 
 function showPopup(e) {
@@ -60,18 +62,29 @@ function handleFormSubmit(evt) {
     closePopup();
 }
 
+function increaseImage(srcValue, nameValue) {
+    popupImage.classList.add('popup_opened');
+    document.querySelector('.popup__image').src = srcValue;
+    document.querySelector('.popup__title_image').textContent = nameValue;
+}
+
 function addElement(srcValue, nameValue) {
     const elementsTemplate = document.querySelector('#elementsTemplate').content,
         element = elementsTemplate.querySelector('.element').cloneNode(true);
     element.querySelector('.element__image').src = srcValue;
+    element.querySelector('.element__image').alt = nameValue;
     element.querySelector('.element__attractions').textContent = nameValue;
     elementsContainer.prepend(element);
     element.querySelector('.element__like').addEventListener('click', function (e) {
         e.target.classList.toggle('element__like_active');
     });
-    element.querySelector('.element__trash').addEventListener('click', function(e){
+    element.querySelector('.element__trash').addEventListener('click', function () {
         const deleteItem = element.closest('.element');
         deleteItem.remove();
+    });
+    element.querySelector('.element__image').addEventListener('click', function(e){
+        increaseImage(e.target.src, e.target.alt);
+
     });
 }
 formElement.addEventListener('submit', handleFormSubmit);

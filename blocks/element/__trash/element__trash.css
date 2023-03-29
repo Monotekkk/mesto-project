@@ -1,6 +1,6 @@
 .element__trash {
     position: absolute;
-    z-index: 1000;
+    z-index: 999;
     width: 18px;
     height: 19px;
     top: 20px;
