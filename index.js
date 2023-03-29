@@ -1,15 +1,15 @@
-const closePopupButton = document.querySelectorAll('.popup__button_close'),
-    popup = document.querySelectorAll('.popup'),
+const closePopupButtonList = document.querySelectorAll('.popup__button_close'),
     popupEditProfile = document.querySelector('.popup_edit-profile'),
     popupAddCard = document.querySelector('.popup_add-card'),
     editProfileButton = document.querySelector('.profile__edit-button'),
     profileName = document.querySelector('.profile__name'),
     profileProfi = document.querySelector('.profile__profi'),
-    popupIput = document.querySelectorAll('.popup__input'),
-    formElement = document.querySelector('.popup__form'),
+    popupIputList = document.querySelectorAll('.popup__input'),
+    formElement = document.querySelector('#formEditProfile'),
     addCardButton = document.querySelector('.profile__add-button'),
     elementsContainer = document.querySelector('.elements'),
     popupImage = document.querySelector('.popup_image'),
+    elementsTemplate = document.querySelector('#elementsTemplate').content,
     initialCards = [{
             name: 'Архыз',
             link: 'https://pictures.s3.yandex.net/frontend-developer/cards-compressed/arkhyz.jpg'
@@ -36,19 +36,21 @@ const closePopupButton = document.querySelectorAll('.popup__button_close'),
         }
     ];
 
-function closePopup(e) {
-    popupEditProfile.classList.remove('popup_opened');
-    popupAddCard.classList.remove('popup_opened');
-    popupImage.classList.remove('popup_opened');
+function closePopup(popup) {
+    console.log(popup);
+}
+
+function openPopup(popup) {
+    popup.classList.add('popup_opened');
 }
 
 function showPopup(e) {
     if (e.target == editProfileButton) {
-        popupIput[0].value = profileName.textContent;
-        popupIput[1].value = profileProfi.textContent;
-        popupEditProfile.classList.add('popup_opened');
+        popupIputList[0].value = profileName.textContent;
+        popupIputList[1].value = profileProfi.textContent;
+        openPopup(popupEditProfile);
     } else if (e.target == addCardButton) {
-        popupAddCard.classList.add('popup_opened');
+        openPopup(popupAddCard);
     } else {
         console.log('error');
     }
@@ -57,8 +59,8 @@ function showPopup(e) {
 
 function handleFormSubmit(evt) {
     evt.preventDefault();
-    profileName.textContent = popupIput[0].value;
-    profileProfi.textContent = popupIput[1].value;
+    profileName.textContent = popupIputList[0].value;
+    profileProfi.textContent = popupIputList[1].value;
     closePopup();
 }
 
@@ -69,8 +71,7 @@ function increaseImage(srcValue, nameValue) {
 }
 
 function addElement(srcValue, nameValue) {
-    const elementsTemplate = document.querySelector('#elementsTemplate').content,
-        element = elementsTemplate.querySelector('.element').cloneNode(true);
+    const element = elementsTemplate.querySelector('.element').cloneNode(true);
     element.querySelector('.element__image').src = srcValue;
     element.querySelector('.element__image').alt = nameValue;
     element.querySelector('.element__attractions').textContent = nameValue;
@@ -82,13 +83,13 @@ function addElement(srcValue, nameValue) {
         const deleteItem = element.closest('.element');
         deleteItem.remove();
     });
-    element.querySelector('.element__image').addEventListener('click', function(e){
+    element.querySelector('.element__image').addEventListener('click', function (e) {
         increaseImage(e.target.src, e.target.alt);
 
     });
 }
 formElement.addEventListener('submit', handleFormSubmit);
-closePopupButton.forEach(element => element.addEventListener('click', closePopup));
+closePopupButtonList.forEach(element => element.addEventListener('click', closePopup(element)));
 editProfileButton.addEventListener('click', showPopup);
 addCardButton.addEventListener('click', showPopup);
 for (i = 0; i < 6; i++) {
@@ -96,8 +97,8 @@ for (i = 0; i < 6; i++) {
 }
 popupAddCard.addEventListener('submit', (e) => {
     e.preventDefault();
-    let name = popupIput[2].value;
-    let href = popupIput[3].value;
+    let name = popupIputList[2].value;
+    let href = popupIputList[3].value;
     addElement(href, name);
     closePopup();
 });
