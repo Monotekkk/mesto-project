@@ -1,21 +1,24 @@
+import './pages/index.css';
 const closePopupButtonList = document.querySelectorAll('.popup__button_close'),
     popupEditProfile = document.querySelector('.popup_edit-profile'),
     popupAddCard = document.querySelector('.popup_add-card'),
+    popupForm = document.querySelector('.popup__form'),
     editProfileButton = document.querySelector('.profile__edit-button'),
     profileName = document.querySelector('.profile__name'),
     profileProfi = document.querySelector('.profile__profi'),
-    popupIputList = document.querySelectorAll('.popup__input'),
+    popupIput = popupForm.querySelector('.popup__input'),
     formEditProfile = document.querySelector('#formEditProfile'),
     addCardButton = document.querySelector('.profile__add-button'),
     elementsContainer = document.querySelector('.elements'),
     popupImage = document.querySelector('.popup_image'),
     elementsTemplate = document.getElementById('elementsTemplate').content,
-    inputProfileName = document.getElementById('inputProfileName'),
-    inputProfileProfi = document.querySelector('#inputProfileProfi'),
+    inputProfileName = document.getElementById('name-input'),
+    inputProfileProfi = document.getElementById('about-input'),
     imagePlace = document.querySelector('.popup__image'),
     imagePlaceTitle = document.querySelector('.popup__title_image'),
     placeName = document.getElementById('inputPlaceName'),
     placeHref = document.getElementById('inputPlaceHref'),
+    popupError = popupForm.querySelector(`.${popupIput.id}-error`),
     initialCards = [{
             name: 'Архыз',
             link: 'https://pictures.s3.yandex.net/frontend-developer/cards-compressed/arkhyz.jpg'
@@ -96,6 +99,23 @@ function addElement(srcValue, nameValue) {
 function renderCard(srcValue, nameValue) {
     elementsContainer.prepend(addElement(srcValue, nameValue));
 };
+function showInputError(element, errorMessage){
+    element.classList.add('popup__input_type_error');
+    popupError.textContent = errorMessage;
+    popupError.classList.add('popup__input-error_active');
+};
+function hideInputError(element){
+    element.classList.remove('popup__input_type_error');
+    popupError.textContent = ' ';
+    popupError.classList.remove('popup__input-error_active');
+};
+function isValid(){
+    if(!popupIput.validity.valid){
+        showInputError(popupIput, popupIput.validationMessage);
+    } else {
+        hideInputError(popupIput);
+    }
+}
 formEditProfile.addEventListener('submit', handleEditProfileFormSubmit);
 closePopupButtonList.forEach(element => element.addEventListener('click', () => {
     closePopup(document.querySelector('.popup_opened'));
@@ -111,3 +131,4 @@ popupAddCard.addEventListener('submit', (e) => {
     e.target.reset();
     closePopup(popupAddCard);
 });
+popupIput.addEventListener('input', isValid);
