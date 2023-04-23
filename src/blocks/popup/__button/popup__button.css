@@ -19,10 +19,7 @@
 .popup__button:hover {
     opacity: 0.8;
 }
-.popup__button:invalid{
-    background-color: #fff;
-    color: #000;
-}
+
 
 @media screen and (max-width: 480px) {
     .popup__button {

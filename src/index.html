@@ -41,27 +41,27 @@
                     <span class="name-input-error popup__input-error"></span>
                 </fieldset>
                 <fieldset class="popup__field">
-                    <input class="popup__input" id="about-input" type="text" placeholder="О себе" name="about">
-                    <span class="popup__input-error">Введите адрес сайта.</span>
+                    <input class="popup__input" id="about-input" type="text" placeholder="О себе" name="about" required>
+                    <span class="about-input-error popup__input-error"></span>
                 </fieldset>
                 <input class='popup__button' value="Сохранить" type="submit">
             </form>
             <button class="popup__button_close"></button>
         </div>
     </section>
-    <section class="popup popup_add-card ">
+    <section class="popup popup_add-card">
         <div class="popup__container">
             <h3 class="popup__title">Новое место</h3>
-            <form class="popup__form" action="editProfile" name="formEditProfile" id="formAddCard" novalidate>
+            <form class="popup__form" action="addCard" name="formAddCard" id="formAddCard" novalidate>
                 <fieldset class="popup__field">
-                    <input class="popup__input" id="inputPlaceName" type="text" placeholder="Название" name="Название"
+                    <input class="popup__input" id="placeName-input" type="text" placeholder="Название" name="placeName"
                         required>
-                    <span class="popup__input-error">Введите адрес сайта.</span>
+                    <span class="placeName-input-error popup__input-error"></span>
                 </fieldset>
                 <fieldset class="popup__field">
-                    <input class="popup__input" id="inputPlaceHref" type="text" placeholder="Ссылка на картинку"
-                        name="Ссылка на картинку" required>
-                    <span class="popup__input-error">Введите адрес сайта.</span>
+                    <input class="popup__input" id="placeHref-input" type="url" placeholder="Ссылка на картинку"
+                        name="placeHref" required>
+                    <span class="placeHref-input-error popup__input-error"></span>
                 </fieldset>
                 <input class='popup__button' value="Сохранить" type="submit">
             </form>
