@@ -3,7 +3,8 @@
     box-sizing:border-box;
     margin: 0 auto;
     width: 358px;
-    margin-bottom: 30px;
+    margin-top: 13px;
+    margin-bottom: 5px;
     border: 0;
     border-bottom: 1px solid rgba(0, 0, 0, 0.2);
     font-family: 'Inter', 'Arial', sans-serif;
@@ -12,16 +13,8 @@
     font-size: 14px;
     line-height: 17px;
 }
-.popup__input:invalid{
-    margin-top: 13px;
-    margin-bottom: 5px;
-}
-.popup__input_type_error{
-    border-bottom: 1px solid red;
-}
 @media screen and (max-width: 480px) {
     .popup__input{
         width: 100%;
-        margin-bottom: 30px;
     }
 }

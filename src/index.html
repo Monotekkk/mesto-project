@@ -36,10 +36,14 @@
         <div class="popup__container">
             <h3 class="popup__title">Редактировать профиль</h3>
             <form class="popup__form" action="editProfile" name="formEditProfile" id="formEditProfile" novalidate>
-                <input class="popup__input" id="name-input" type="text" placeholder="Имя" name="name" required>
-                <span class="name-input-error popup__input-error"></span>
-                <input class="popup__input" id="about-input" type="text" placeholder="О себе" name="about">
-                <span class="popup__input-error">Введите адрес сайта.</span>
+                <fieldset class="popup__field">
+                    <input class="popup__input" id="name-input" type="text" placeholder="Имя" name="name" required>
+                    <span class="name-input-error popup__input-error"></span>
+                </fieldset>
+                <fieldset class="popup__field">
+                    <input class="popup__input" id="about-input" type="text" placeholder="О себе" name="about">
+                    <span class="popup__input-error">Введите адрес сайта.</span>
+                </fieldset>
                 <input class='popup__button' value="Сохранить" type="submit">
             </form>
             <button class="popup__button_close"></button>
@@ -49,8 +53,16 @@
         <div class="popup__container">
             <h3 class="popup__title">Новое место</h3>
             <form class="popup__form" action="editProfile" name="formEditProfile" id="formAddCard" novalidate>
-                <input class="popup__input" id="inputPlaceName"  type="text" placeholder="Название" name="Название" required>
-                <input class="popup__input" id="inputPlaceHref" type="text" placeholder="Ссылка на картинку" name="Ссылка на картинку" required>
+                <fieldset class="popup__field">
+                    <input class="popup__input" id="inputPlaceName" type="text" placeholder="Название" name="Название"
+                        required>
+                    <span class="popup__input-error">Введите адрес сайта.</span>
+                </fieldset>
+                <fieldset class="popup__field">
+                    <input class="popup__input" id="inputPlaceHref" type="text" placeholder="Ссылка на картинку"
+                        name="Ссылка на картинку" required>
+                    <span class="popup__input-error">Введите адрес сайта.</span>
+                </fieldset>
                 <input class='popup__button' value="Сохранить" type="submit">
             </form>
             <button class="popup__button_close"></button>
@@ -65,7 +77,8 @@
     </section>
     <template id="elementsTemplate">
         <div class="element">
-            <img src="<%=require('./image/kirill-pershin-1088404-unsplash.jpg')%>" alt="Карачаевск" class="element__image">
+            <img src="<%=require('./image/kirill-pershin-1088404-unsplash.jpg')%>" alt="Карачаевск"
+                class="element__image">
             <div class="element__info">
                 <h2 class="element__attractions">Карачаевск</h2>
                 <button class="element__like" type="button" aria-label="лайк"></button>
