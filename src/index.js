@@ -113,11 +113,20 @@ popupAddCard.addEventListener('submit', (e) => {
     closePopup(popupAddCard);
 });
 popupOverlayList.forEach(element => {
-    element.addEventListener('click', (e)=>{
+    element.addEventListener('click', (e) => {
         closePopup(e.target);
     })
 });
-
+popupOverlayList.forEach(element => {
+    element.addEventListener('click', (e) => {
+        closePopup(e.target);
+    });
+});
+window.addEventListener('keydown', (evt) => {
+   if(evt.key === 'Escape'){
+    closePopup(document.querySelector('.popup_opened'));
+   }
+});
 /* Валидация */
 function showInputError(formElement, inputElement, errorMessage) {
     const errorElement = formElement.querySelector(`.${inputElement.id}-error`);
@@ -135,10 +144,10 @@ function hideInputError(formElement, inputElement) {
 
 function isValid(formElement, inputElement) {
     if (inputElement.validity.patternMismatch) {
-    inputElement.setCustomValidity("Поле могут содержать только латинские буквы, кириллические буквы, знаки дефиса и пробелы.");
-  } else {
-    inputElement.setCustomValidity("");
-  }
+        inputElement.setCustomValidity("Поле могут содержать только латинские буквы, кириллические буквы, знаки дефиса и пробелы.");
+    } else {
+        inputElement.setCustomValidity("");
+    }
     if (!inputElement.validity.valid) {
         showInputError(formElement, inputElement, inputElement.validationMessage);
     } else {
@@ -149,7 +158,7 @@ function isValid(formElement, inputElement) {
 function setEventListeners(formElement) {
     const inputList = Array.from(formElement.querySelectorAll('.popup__input')),
         buttonElement = formElement.querySelector('.popup__button');
-            toggleButtonState(inputList, buttonElement);
+    toggleButtonState(inputList, buttonElement);
     inputList.forEach((inputElement) => {
         inputElement.addEventListener('input', function () {
             isValid(formElement, inputElement);
@@ -167,6 +176,7 @@ function enableValidation() {
         setEventListeners(formElement);
     });
 };
+
 function hasInvalidInput(inputList) {
     return inputList.some((inputElement) => {
         return !inputElement.validity.valid;
@@ -183,4 +193,3 @@ function toggleButtonState(inputList, buttonElement) {
     }
 }
 enableValidation();
-
