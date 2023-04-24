@@ -2,7 +2,7 @@ import './pages/index.css';
 const closePopupButtonList = document.querySelectorAll('.popup__button_close'),
     popupEditProfile = document.querySelector('.popup_edit-profile'),
     popupAddCard = document.querySelector('.popup_add-card'),
-    popupForm = document.querySelector('.popup__form'),
+    popupOverlayList = document.querySelectorAll('.popup'),
     editProfileButton = document.querySelector('.profile__edit-button'),
     profileName = document.querySelector('.profile__name'),
     profileProfi = document.querySelector('.profile__profi'),
@@ -112,10 +112,15 @@ popupAddCard.addEventListener('submit', (e) => {
     e.target.reset();
     closePopup(popupAddCard);
 });
+popupOverlayList.forEach(element => {
+    element.addEventListener('click', (e)=>{
+        closePopup(e.target);
+    })
+});
+
 /* Валидация */
 function showInputError(formElement, inputElement, errorMessage) {
     const errorElement = formElement.querySelector(`.${inputElement.id}-error`);
-    console.log(errorElement);
     inputElement.classList.add('popup__input_type_error');
     errorElement.textContent = errorMessage;
     errorElement.classList.add('popup__input-error_active');
@@ -129,6 +134,11 @@ function hideInputError(formElement, inputElement) {
 }
 
 function isValid(formElement, inputElement) {
+    if (inputElement.validity.patternMismatch) {
+    inputElement.setCustomValidity("Поле могут содержать только латинские буквы, кириллические буквы, знаки дефиса и пробелы.");
+  } else {
+    inputElement.setCustomValidity("");
+  }
     if (!inputElement.validity.valid) {
         showInputError(formElement, inputElement, inputElement.validationMessage);
     } else {
@@ -139,7 +149,7 @@ function isValid(formElement, inputElement) {
 function setEventListeners(formElement) {
     const inputList = Array.from(formElement.querySelectorAll('.popup__input')),
         buttonElement = formElement.querySelector('.popup__button');
-        toggleButtonState(inputList, buttonElement);
+            toggleButtonState(inputList, buttonElement);
     inputList.forEach((inputElement) => {
         inputElement.addEventListener('input', function () {
             isValid(formElement, inputElement);
@@ -157,7 +167,6 @@ function enableValidation() {
         setEventListeners(formElement);
     });
 };
-enableValidation();
 function hasInvalidInput(inputList) {
     return inputList.some((inputElement) => {
         return !inputElement.validity.valid;
@@ -173,3 +182,5 @@ function toggleButtonState(inputList, buttonElement) {
         buttonElement.classList.remove('popup__button_inactive');
     }
 }
+enableValidation();
+

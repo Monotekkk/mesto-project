@@ -37,11 +37,13 @@
             <h3 class="popup__title">Редактировать профиль</h3>
             <form class="popup__form" action="editProfile" name="formEditProfile" id="formEditProfile" novalidate>
                 <fieldset class="popup__field">
-                    <input class="popup__input" id="name-input" type="text" placeholder="Имя" name="name" required>
+                    <input class="popup__input" id="name-input" type="text" placeholder="Имя" name="name" minlength="2"
+                        maxlength="40" pattern="^[a-zA-Zа-яА-ЯЁё -]+$" required>
                     <span class="name-input-error popup__input-error"></span>
                 </fieldset>
                 <fieldset class="popup__field">
-                    <input class="popup__input" id="about-input" type="text" placeholder="О себе" name="about" required>
+                    <input class="popup__input" id="about-input" type="text" placeholder="О себе" name="about"
+                        minlength="2" maxlength="200" pattern="^[a-zA-Zа-яА-ЯЁё -]+$" required>
                     <span class="about-input-error popup__input-error"></span>
                 </fieldset>
                 <input class='popup__button' value="Сохранить" type="submit">
@@ -55,7 +57,7 @@
             <form class="popup__form" action="addCard" name="formAddCard" id="formAddCard" novalidate>
                 <fieldset class="popup__field">
                     <input class="popup__input" id="placeName-input" type="text" placeholder="Название" name="placeName"
-                        required>
+                        minlength="2" maxlength="40" required>
                     <span class="placeName-input-error popup__input-error"></span>
                 </fieldset>
                 <fieldset class="popup__field">
