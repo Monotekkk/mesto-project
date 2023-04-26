@@ -1,25 +1,39 @@
+const nameInput = document.getElementById('name-input'),
+    aboutInput = document.getElementById('about-input'),
+    profieName = document.querySelector('.profile__name'),
+    profileProfi = document.querySelector('.profile__profi'),
+    popupEditProfile=document.querySelector('.popup_edit-profile'),
+    popupAddCard = document.querySelector('.popup_add-card');
 function closePopup(popup) {
     popup.classList.remove('popup_opened');
+    document.removeEventListener('keydown', closeEscPopup);
 }
 
 function openPopup(popup) {
     popup.classList.add('popup_opened');
+    document.addEventListener('keydown', closeEscPopup);
 }
 
+function closeEscPopup(e) {
+    if(e.key === 'Escape') {
+     const popup = document.querySelector('.popup_opened');
+     closePopup(popup);
+    }
+   }
 function showPopupEditProfile() {
-    document.getElementById('name-input').value = document.querySelector('.profile__name').textContent;
-    document.getElementById('about-input').value = document.querySelector('.profile__profi').textContent;
-    openPopup(document.querySelector('.popup_edit-profile'));
+    nameInput.value = profieName.textContent;
+    aboutInput.value = profileProfi.textContent;
+    openPopup(popupEditProfile);
 }
 
 function showPopupAddCard() {
-    openPopup(document.querySelector('.popup_add-card'));
+    openPopup(popupAddCard);
 }
 
 function handleEditProfileFormSubmit(evt) {
     evt.preventDefault();
-    document.querySelector('.profile__name').textContent = document.querySelector('#name-input').value;
-    document.querySelector('.profile__profi').textContent = document.querySelector('#about-input').value;
-    closePopup(document.querySelector('.popup_edit-profile'));
+    profieName.textContent = nameInput.value;
+    profileProfi.textContent = aboutInput.value;
+    closePopup(popupEditProfile);
 }
 export {showPopupEditProfile, showPopupAddCard, handleEditProfileFormSubmit, closePopup, openPopup};

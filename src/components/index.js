@@ -1,9 +1,8 @@
-import './pages/index.css';
-import { enableValidation } from './components/validate.js';
-import { renderCard } from './components/card';
-import {showPopupEditProfile, showPopupAddCard, handleEditProfileFormSubmit, closePopup} from './components/modal';
+import '../pages/index.css';
+import { enableValidation } from './validate.js';
+import { renderCard } from './card';
+import {showPopupEditProfile, showPopupAddCard, handleEditProfileFormSubmit, closePopup} from './modal';
 const closePopupButtonList = document.querySelectorAll('.popup__button_close'),
-    popupEditProfile = document.querySelector('.popup_edit-profile'),
     popupAddCard = document.querySelector('.popup_add-card'),
     popupOverlayList = document.querySelectorAll('.popup'),
     editProfileButton = document.querySelector('.profile__edit-button'),
@@ -37,7 +36,6 @@ const closePopupButtonList = document.querySelectorAll('.popup__button_close'),
         }
     ];
 
-
 formEditProfile.addEventListener('submit', handleEditProfileFormSubmit);
 closePopupButtonList.forEach(element => element.addEventListener('click', () => {
     closePopup(document.querySelector('.popup_opened'));
@@ -51,24 +49,15 @@ popupAddCard.addEventListener('submit', (e) => {
     e.preventDefault();
     renderCard(placeHref.value, placeName.value);
     e.target.reset();
+    e.target.querySelector('.popup__button').classList.add('popup__button_inactive')
     closePopup(popupAddCard);
+
 });
 popupOverlayList.forEach(element => {
     element.addEventListener('click', (e) => {
         closePopup(e.target);
     })
 });
-popupOverlayList.forEach(element => {
-    element.addEventListener('click', (e) => {
-        closePopup(e.target);
-    });
-});
-window.addEventListener('keydown', (evt) => {
-   if(evt.key === 'Escape'){
-    closePopup(document.querySelector('.popup_opened'));
-   }
-});
-
 enableValidation({
     formSelector: '.popup__form',
     inputSelector: '.popup__input',
