@@ -38,7 +38,7 @@ function setEventListeners(formElement, values) {
     });
 };
 
-function enableValidation(values){
+function enableValidation(values) {
     const formList = Array.from(document.querySelectorAll(values.formSelector));
     formList.forEach((formElement) => {
         formElement.addEventListener('submit', (evt) => {
@@ -54,13 +54,20 @@ function hasInvalidInput(inputList) {
     })
 };
 
+function buttonDisabled(buttonElement, inactiveButtonClass) {
+    buttonElement.disabled = true;
+    buttonElement.classList.add(inactiveButtonClass);
+}
+
 function toggleButtonState(inputList, buttonElement, values) {
     if (hasInvalidInput(inputList)) {
-        buttonElement.disabled = true;
-        buttonElement.classList.add(values.inactiveButtonClass);
+        buttonDisabled(buttonElement, values.inactiveButtonClass);
     } else {
         buttonElement.disabled = false;
         buttonElement.classList.remove(values.inactiveButtonClass);
     }
 }
-export {enableValidation};
+export {
+    enableValidation,
+    buttonDisabled
+};

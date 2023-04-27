@@ -1,5 +1,5 @@
 import '../pages/index.css';
-import { enableValidation } from './validate.js';
+import { enableValidation, buttonDisabled } from './validate.js';
 import { renderCard } from './card';
 import {showPopupEditProfile, showPopupAddCard, handleEditProfileFormSubmit, closePopup} from './modal';
 const closePopupButtonList = document.querySelectorAll('.popup__button_close'),
@@ -8,8 +8,9 @@ const closePopupButtonList = document.querySelectorAll('.popup__button_close'),
     editProfileButton = document.querySelector('.profile__edit-button'),
     formEditProfile = document.querySelector('#formEditProfile'),
     addCardButton = document.querySelector('.profile__add-button'),
-    placeName = document.getElementById('placeName-input'),
-    placeHref = document.getElementById('placeHref-input'),
+    placeName = document.querySelector('#placeName-input'),
+    placeHref = document.querySelector('#placeHref-input'),
+    submitCardButton = popupAddCard.querySelector('.popup__button'),
     initialCards = [{
             name: 'Архыз',
             link: 'https://pictures.s3.yandex.net/frontend-developer/cards-compressed/arkhyz.jpg'
@@ -49,7 +50,7 @@ popupAddCard.addEventListener('submit', (e) => {
     e.preventDefault();
     renderCard(placeHref.value, placeName.value);
     e.target.reset();
-    e.target.querySelector('.popup__button').classList.add('popup__button_inactive')
+    buttonDisabled(submitCardButton, 'popup__button_inactive');
     closePopup(popupAddCard);
 
 });

@@ -3,7 +3,7 @@ const imagePlace = document.querySelector('.popup__image'),
     imagePlaceTitle = document.querySelector('.popup__title_image'),
     elementsContainer = document.querySelector('.elements'),
     popupImage = document.querySelector('.popup_image'),
-    elementsTemplate = document.getElementById('elementsTemplate').content;
+    elementsTemplate = document.querySelector('#elementsTemplate').content;
 
 function increaseImage(srcValue, nameValue) {
     openPopup(popupImage);

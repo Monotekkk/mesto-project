@@ -1,5 +1,5 @@
-const nameInput = document.getElementById('name-input'),
-    aboutInput = document.getElementById('about-input'),
+const nameInput = document.querySelector('#name-input'),
+    aboutInput = document.querySelector('#about-input'),
     profieName = document.querySelector('.profile__name'),
     profileProfi = document.querySelector('.profile__profi'),
     popupEditProfile=document.querySelector('.popup_edit-profile'),
