@@ -34,6 +34,35 @@ function addElement(srcValue, nameValue) {
 function renderCard(srcValue, nameValue) {
     elementsContainer.prepend(addElement(srcValue, nameValue));
 };
+function renderInitalCard(){
+   fetch('https://mesto.nomoreparties.co/v1/plus-cohort-23/cards', {
+    headers: {
+      authorization: 'b879d976-9451-46e7-99e2-ffc6de83a372',
+    },
+    method: 'GET'
+  })
+    .then(res => res.json())
+    .then((result) => {
+        result.forEach(element => {
+            renderCard(element.link,element.name);
+            console.log(result);
+        });
+
+    });
+}
+function addCardToServer(srcValue, nameValue){
+    fetch('https://nomoreparties.co/v1/plus-cohort-23/cards/', {
+        headers: {
+          authorization: 'b879d976-9451-46e7-99e2-ffc6de83a372',
+          'Content-Type': 'application/json'
+        },
+        method: 'POST',
+        body: JSON.stringify({
+            name: nameValue,
+            link: srcValue
+        }),
+      })
+}
 export {
-    renderCard
+    renderCard, renderInitalCard, addCardToServer
 };

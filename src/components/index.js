@@ -1,7 +1,19 @@
 import '../pages/index.css';
-import { enableValidation, buttonDisabled } from './validate.js';
-import { renderCard } from './card';
-import {showPopupEditProfile, showPopupAddCard, handleEditProfileFormSubmit, closePopup} from './modal';
+import {
+    enableValidation,
+    buttonDisabled
+} from './validate.js';
+import {
+    renderCard,
+    renderInitalCard,
+    addCardToServer
+} from './card';
+import {
+    showPopupEditProfile,
+    showPopupAddCard,
+    handleEditProfileFormSubmit,
+    closePopup
+} from './modal';
 const closePopupButtonList = document.querySelectorAll('.popup__button_close'),
     popupAddCard = document.querySelector('.popup_add-card'),
     popupOverlayList = document.querySelectorAll('.popup'),
@@ -11,44 +23,19 @@ const closePopupButtonList = document.querySelectorAll('.popup__button_close'),
     placeName = document.querySelector('#placeName-input'),
     placeHref = document.querySelector('#placeHref-input'),
     submitCardButton = popupAddCard.querySelector('.popup__button'),
-    initialCards = [{
-            name: 'Архыз',
-            link: 'https://pictures.s3.yandex.net/frontend-developer/cards-compressed/arkhyz.jpg'
-        },
-        {
-            name: 'Челябинская область',
-            link: 'https://pictures.s3.yandex.net/frontend-developer/cards-compressed/chelyabinsk-oblast.jpg'
-        },
-        {
-            name: 'Иваново',
-            link: 'https://pictures.s3.yandex.net/frontend-developer/cards-compressed/ivanovo.jpg'
-        },
-        {
-            name: 'Камчатка',
-            link: 'https://pictures.s3.yandex.net/frontend-developer/cards-compressed/kamchatka.jpg'
-        },
-        {
-            name: 'Холмогорский район',
-            link: 'https://pictures.s3.yandex.net/frontend-developer/cards-compressed/kholmogorsky-rayon.jpg'
-        },
-        {
-            name: 'Байкал',
-            link: 'https://pictures.s3.yandex.net/frontend-developer/cards-compressed/baikal.jpg'
-        }
-    ];
-
+    profieName = document.querySelector('.profile__name'),
+    profileProfi = document.querySelector('.profile__profi'),
+    profileAvatar = document.querySelector('.profile__avatar');
 formEditProfile.addEventListener('submit', handleEditProfileFormSubmit);
 closePopupButtonList.forEach(element => element.addEventListener('click', () => {
     closePopup(document.querySelector('.popup_opened'));
 }));
 editProfileButton.addEventListener('click', showPopupEditProfile);
 addCardButton.addEventListener('click', showPopupAddCard);
-initialCards.forEach(element => {
-    renderCard(element.link, element.name)
-});
 popupAddCard.addEventListener('submit', (e) => {
     e.preventDefault();
     renderCard(placeHref.value, placeName.value);
+    addCardToServer(placeHref.value, placeName.value);
     e.target.reset();
     buttonDisabled(submitCardButton, 'popup__button_inactive');
     closePopup(popupAddCard);
@@ -66,4 +53,16 @@ enableValidation({
     inactiveButtonClass: 'popup__button_inactive',
     inputErrorClass: 'popup__input_type_error',
     errorClass: 'popup__error_visible'
-  });
+});
+renderInitalCard();
+fetch('https://nomoreparties.co/v1/plus-cohort-23/users/me', {
+        headers: {
+            authorization: 'b879d976-9451-46e7-99e2-ffc6de83a372'
+        },
+        method: 'GET'
+    }).then(res => res.json())
+    .then((result) => {
+        profieName.textContent = result.name;
+        profileProfi.textContent = result.about;
+        profileAvatar.src = result.avatar;
+    });
