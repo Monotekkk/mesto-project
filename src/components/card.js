@@ -34,6 +34,9 @@ function addElement(srcValue, nameValue) {
 function renderCard(srcValue, nameValue) {
     elementsContainer.prepend(addElement(srcValue, nameValue));
 };
+function сounterLikes(count){
+    document.querySelector('.element__likes').textContent = count.length;
+}
 function renderInitalCard(){
    fetch('https://mesto.nomoreparties.co/v1/plus-cohort-23/cards', {
     headers: {
@@ -45,7 +48,7 @@ function renderInitalCard(){
     .then((result) => {
         result.forEach(element => {
             renderCard(element.link,element.name);
-            console.log(result);
+            сounterLikes(element.likes);
         });
 
     });
