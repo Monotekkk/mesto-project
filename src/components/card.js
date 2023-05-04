@@ -1,4 +1,5 @@
 import { closePopup, openPopup } from "./modal";
+import { requestSetLike, requestRemoveLike, requestDeleteCard, requestGetCard, requestPostCard } from "./api";
 const imagePlace = document.querySelector('.popup__image'),
     imagePlaceTitle = document.querySelector('.popup__title_image'),
     elementsContainer = document.querySelector('.elements'),
@@ -24,7 +25,7 @@ function addElement(srcValue, nameValue, elementId, owner) {
     element.querySelector('.element__like').addEventListener('click', function (e) {
         e.target.classList.toggle('element__like_active');
        if(e.target.classList.contains('element__like_active')){
-            fetch(`https://nomoreparties.co/v1/plus-cohort-23/cards/likes/${elementId}`,{
+        /*    fetch(`https://nomoreparties.co/v1/plus-cohort-23/cards/likes/${elementId}`,{
                 headers: {
                     authorization: 'b879d976-9451-46e7-99e2-ffc6de83a372',
                     'Content-Type': 'application/json'
@@ -34,9 +35,10 @@ function addElement(srcValue, nameValue, elementId, owner) {
                   .then(res => res.json())
                   .then(result =>{
                     сounterLikes(result.likes.length, result);
-            })
+            })*/
+            requestSetLike(elementId);
         }else{
-            fetch(`https://nomoreparties.co/v1/plus-cohort-23/cards/likes/${elementId}`,{
+        /*    fetch(`https://nomoreparties.co/v1/plus-cohort-23/cards/likes/${elementId}`,{
                 headers: {
                     authorization: 'b879d976-9451-46e7-99e2-ffc6de83a372',
                     'Content-Type': 'application/json'
@@ -46,7 +48,8 @@ function addElement(srcValue, nameValue, elementId, owner) {
                   .then(res => res.json())
                   .then(result =>{
                     сounterLikes(result.likes.length, result);
-            })
+            })*/
+            requestRemoveLike(elementId);
         }
     });
     if(owner =="2d1ce162dcb142eb0b940e01" || !owner){
@@ -65,7 +68,8 @@ function addElement(srcValue, nameValue, elementId, owner) {
 function deleteCard(deleteItem, elementId){
     openPopup(popupDeleteCard);
     popupDeleteCard.querySelector('.popup__button').addEventListener('click', ()=>{
-        fetch(`https://nomoreparties.co/v1/plus-cohort-23/cards/${elementId}`, {
+        requestDeleteCard(elementId);
+       /* fetch(`https://nomoreparties.co/v1/plus-cohort-23/cards/${elementId}`, {
             headers: {
               authorization: 'b879d976-9451-46e7-99e2-ffc6de83a372',
               'Content-Type': 'application/json'
@@ -75,7 +79,7 @@ function deleteCard(deleteItem, elementId){
             .then(res => res.json())
             .then(result =>{
                 console.log(result);
-            })
+            })*/
             closePopup(popupDeleteCard);
             deleteItem.remove();
     })
@@ -93,7 +97,8 @@ function сounterLikes(count, cardID){
     })
 }
 function renderInitalCard(){
-   fetch('https://mesto.nomoreparties.co/v1/plus-cohort-23/cards', {
+   requestGetCard();
+    /*fetch('https://mesto.nomoreparties.co/v1/plus-cohort-23/cards', {
     headers: {
       authorization: 'b879d976-9451-46e7-99e2-ffc6de83a372',
     },
@@ -106,27 +111,28 @@ function renderInitalCard(){
             сounterLikes(element.likes.length, element);
         });
 
-    });
+    });*/
 }
 function addCardToServer(srcValue, nameValue){
     popupAddCard.querySelector('.popup__button').value = 'Сохранение...';
-    fetch('https://nomoreparties.co/v1/plus-cohort-23/cards/', {
-        headers: {
-          authorization: 'b879d976-9451-46e7-99e2-ffc6de83a372',
-          'Content-Type': 'application/json'
-        },
-        method: 'POST',
-        body: JSON.stringify({
-            name: nameValue,
-            link: srcValue
-        }),
-      }).then(()=>{
-        popupAddCard.querySelector('.popup__button').value  = 'Сохранить';
-      }).finally(()=>{
-        closePopup(popupAddCard);
-      });
+    requestPostCard(nameValue, srcValue, popupAddCard);
+    // fetch('https://nomoreparties.co/v1/plus-cohort-23/cards/', {
+    //     headers: {
+    //       authorization: 'b879d976-9451-46e7-99e2-ffc6de83a372',
+    //       'Content-Type': 'application/json'
+    //     },
+    //     method: 'POST',
+    //     body: JSON.stringify({
+    //         name: nameValue,
+    //         link: srcValue
+    //     }),
+    //   }).then(()=>{
+    //     popupAddCard.querySelector('.popup__button').value  = 'Сохранить';
+    //   }).finally(()=>{
+    //     closePopup(popupAddCard);
+    //   });
 
 }
 export {
-    renderCard, renderInitalCard, addCardToServer
+    renderCard, renderInitalCard, addCardToServer, сounterLikes
 };

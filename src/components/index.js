@@ -16,6 +16,9 @@ import {
     openPopup,
     updateAvatar
 } from './modal';
+import {
+    requestUserInfo
+} from './api';
 const closePopupButtonList = document.querySelectorAll('.popup__button_close'),
     popupAddCard = document.querySelector('.popup_add-card'),
     popupOverlayList = document.querySelectorAll('.popup'),
@@ -29,7 +32,7 @@ const closePopupButtonList = document.querySelectorAll('.popup__button_close'),
     profileProfi = document.querySelector('.profile__profi'),
     formUpdateAvatar = document.querySelector('#formUpdateAvatar'),
     profileAvatar = document.querySelector('.profile__avatar'),
-    profileAvatarBtn = document.querySelector('.profile__avatar-btn');
+    profileAvatarBtn = document.querySelector('.profile__avatar-button');
 formEditProfile.addEventListener('submit', handleEditProfileFormSubmit);
 formUpdateAvatar.addEventListener('submit', updateAvatar);
 closePopupButtonList.forEach(element => element.addEventListener('click', () => {
@@ -51,7 +54,7 @@ popupOverlayList.forEach(element => {
         closePopup(e.target);
     })
 });
-profileAvatarBtn.addEventListener('click', ()=>{
+profileAvatarBtn.addEventListener('click', () => {
     openPopup(document.querySelector('.popup_update-avatar'));
 });
 enableValidation({
@@ -63,14 +66,4 @@ enableValidation({
     errorClass: 'popup__error_visible'
 });
 renderInitalCard();
-fetch('https://nomoreparties.co/v1/plus-cohort-23/users/me', {
-        headers: {
-            authorization: 'b879d976-9451-46e7-99e2-ffc6de83a372'
-        },
-        method: 'GET'
-    }).then(res => res.json())
-    .then((result) => {
-        profieName.textContent = result.name;
-        profileProfi.textContent = result.about;
-        profileAvatar.src = result.avatar;
-    });
+requestUserInfo(profieName, profileProfi, profileAvatar);

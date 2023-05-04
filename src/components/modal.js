@@ -1,3 +1,6 @@
+import {
+    requestPathInfo
+} from './api';
 const nameInput = document.querySelector('#name-input'),
     aboutInput = document.querySelector('#about-input'),
     avatarHref = document.querySelector('#updateAvatar-input'),
@@ -40,41 +43,48 @@ function handleEditProfileFormSubmit(evt) {
     popupEditProfile.querySelector('.popup__button').value = 'Сохранение...';
     profieName.textContent = nameInput.value;
     profileProfi.textContent = aboutInput.value;
-    fetch('https://nomoreparties.co/v1/plus-cohort-23/users/me', {
-        method: 'PATCH',
-        headers: {
-            authorization: 'b879d976-9451-46e7-99e2-ffc6de83a372',
-            'Content-Type': 'application/json'
-        },
-        body: JSON.stringify({
-            name: nameInput.value,
-            about: aboutInput.value
-        })
-    }).finally(()=>{
-        closePopup(popupEditProfile);
-        popupEditProfile.querySelector('.popup__button').value = 'Сохранить';
-    });
+    // fetch('https://nomoreparties.co/v1/plus-cohort-23/users/me', {
+    //     method: 'PATCH',
+    //     headers: {
+    //         authorization: 'b879d976-9451-46e7-99e2-ffc6de83a372',
+    //         'Content-Type': 'application/json'
+    //     },
+    //     body: JSON.stringify({
+    //         name: nameInput.value,
+    //         about: aboutInput.value
+    //     })
+    // }).finally(()=>{
+    //     closePopup(popupEditProfile);
+    //     popupEditProfile.querySelector('.popup__button').value = 'Сохранить';
+    // });
+    requestPathInfo({
+        name: nameInput.value,
+        about: aboutInput.value
+    }, popupEditProfile, 'users/me');
 }
 
 function updateAvatar() {
-   popupUpdateAvatar.querySelector('.popup__button').value = 'Сохранение...';
-    fetch('https://nomoreparties.co/v1/plus-cohort-23/users/me/avatar', {
-            headers: {
-                authorization: 'b879d976-9451-46e7-99e2-ffc6de83a372',
-                'Content-Type': 'application/json'
-            },
-            method: 'PATCH',
-            body: JSON.stringify({
-                avatar: avatarHref.value
-            })
-        }).then(res => res.json())
-        .then((result) => {
-            console.log(result);
-        }).finally(()=>{
-            closePopup(popupUpdateAvatar);
-            popupUpdateAvatar.querySelector('.popup__button').value = 'Сохранить';
-        })
-        profileAvatar.src = avatarHref.value;
+    popupUpdateAvatar.querySelector('.popup__button').value = 'Сохранение...';
+    // fetch('https://nomoreparties.co/v1/plus-cohort-23/users/me/avatar', {
+    //         headers: {
+    //             authorization: 'b879d976-9451-46e7-99e2-ffc6de83a372',
+    //             'Content-Type': 'application/json'
+    //         },
+    //         method: 'PATCH',
+    //         body: JSON.stringify({
+    //             avatar: avatarHref.value
+    //         })
+    //     }).then(res => res.json())
+    //     .then((result) => {
+    //         console.log(result);
+    //     }).finally(() => {
+    //         closePopup(popupUpdateAvatar);
+    //         popupUpdateAvatar.querySelector('.popup__button').value = 'Сохранить';
+    //     })
+    requestPathInfo({
+        avatar: avatarHref.value
+    }, popupUpdateAvatar, 'users/me/avatar');
+    profileAvatar.src = avatarHref.value;
 }
 export {
     showPopupEditProfile,
