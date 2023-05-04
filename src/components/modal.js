@@ -1,8 +1,11 @@
 const nameInput = document.querySelector('#name-input'),
     aboutInput = document.querySelector('#about-input'),
+    avatarHref = document.querySelector('#updateAvatar-input'),
     profieName = document.querySelector('.profile__name'),
     profileProfi = document.querySelector('.profile__profi'),
+    profileAvatar = document.querySelector('.profile__avatar'),
     popupEditProfile = document.querySelector('.popup_edit-profile'),
+    popupUpdateAvatar = document.querySelector('.popup_update-avatar'),
     popupAddCard = document.querySelector('.popup_add-card');
 
 function closePopup(popup) {
@@ -37,7 +40,7 @@ function handleEditProfileFormSubmit(evt) {
     profieName.textContent = nameInput.value;
     profileProfi.textContent = aboutInput.value;
     closePopup(popupEditProfile);
-     fetch('https://nomoreparties.co/v1/plus-cohort-23/users/me', {
+    fetch('https://nomoreparties.co/v1/plus-cohort-23/users/me', {
         method: 'PATCH',
         headers: {
             authorization: 'b879d976-9451-46e7-99e2-ffc6de83a372',
@@ -49,10 +52,29 @@ function handleEditProfileFormSubmit(evt) {
         })
     })
 }
+
+function updateAvatar() {
+    fetch('https://nomoreparties.co/v1/plus-cohort-23/users/me/avatar', {
+            headers: {
+                authorization: 'b879d976-9451-46e7-99e2-ffc6de83a372',
+                'Content-Type': 'application/json'
+            },
+            method: 'PATCH',
+            body: JSON.stringify({
+                avatar: avatarHref.value
+            })
+        }).then(res => res.json())
+        .then((result) => {
+            console.log(result);
+        });
+        profileAvatar.src = avatarHref.value;
+        closePopup(popupUpdateAvatar);
+}
 export {
     showPopupEditProfile,
     showPopupAddCard,
     handleEditProfileFormSubmit,
     closePopup,
-    openPopup
+    openPopup,
+    updateAvatar
 };

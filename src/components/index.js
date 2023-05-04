@@ -6,13 +6,15 @@ import {
 import {
     renderCard,
     renderInitalCard,
-    addCardToServer
+    addCardToServer,
 } from './card';
 import {
     showPopupEditProfile,
     showPopupAddCard,
     handleEditProfileFormSubmit,
-    closePopup
+    closePopup,
+    openPopup,
+    updateAvatar
 } from './modal';
 const closePopupButtonList = document.querySelectorAll('.popup__button_close'),
     popupAddCard = document.querySelector('.popup_add-card'),
@@ -25,8 +27,10 @@ const closePopupButtonList = document.querySelectorAll('.popup__button_close'),
     submitCardButton = popupAddCard.querySelector('.popup__button'),
     profieName = document.querySelector('.profile__name'),
     profileProfi = document.querySelector('.profile__profi'),
+    formUpdateAvatar = document.querySelector('#formUpdateAvatar'),
     profileAvatar = document.querySelector('.profile__avatar');
 formEditProfile.addEventListener('submit', handleEditProfileFormSubmit);
+formUpdateAvatar.addEventListener('submit', updateAvatar);
 closePopupButtonList.forEach(element => element.addEventListener('click', () => {
     closePopup(document.querySelector('.popup_opened'));
 }));
@@ -45,6 +49,9 @@ popupOverlayList.forEach(element => {
     element.addEventListener('click', (e) => {
         closePopup(e.target);
     })
+});
+profileAvatar.addEventListener('click', ()=>{
+    openPopup(document.querySelector('.popup_update-avatar'));
 });
 enableValidation({
     formSelector: '.popup__form',
