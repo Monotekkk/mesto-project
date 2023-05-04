@@ -1,10 +1,10 @@
-import { data } from "autoprefixer";
 import { closePopup, openPopup } from "./modal";
 const imagePlace = document.querySelector('.popup__image'),
     imagePlaceTitle = document.querySelector('.popup__title_image'),
     elementsContainer = document.querySelector('.elements'),
     popupImage = document.querySelector('.popup_image'),
     popupDeleteCard = document.querySelector('.popup_delete-card'),
+    popupAddCard = document.querySelector('.popup_add-card'),
     elementsTemplate = document.querySelector('#elementsTemplate').content;
 
 function increaseImage(srcValue, nameValue) {
@@ -109,6 +109,7 @@ function renderInitalCard(){
     });
 }
 function addCardToServer(srcValue, nameValue){
+    popupAddCard.querySelector('.popup__button').value = 'Сохранение...';
     fetch('https://nomoreparties.co/v1/plus-cohort-23/cards/', {
         headers: {
           authorization: 'b879d976-9451-46e7-99e2-ffc6de83a372',
@@ -119,7 +120,12 @@ function addCardToServer(srcValue, nameValue){
             name: nameValue,
             link: srcValue
         }),
-      })
+      }).then(()=>{
+        popupAddCard.querySelector('.popup__button').value  = 'Сохранить';
+      }).finally(()=>{
+        closePopup(popupAddCard);
+      });
+
 }
 export {
     renderCard, renderInitalCard, addCardToServer

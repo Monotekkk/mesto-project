@@ -37,9 +37,9 @@ function showPopupAddCard() {
 
 function handleEditProfileFormSubmit(evt) {
     evt.preventDefault();
+    popupEditProfile.querySelector('.popup__button').value = 'Сохранение...';
     profieName.textContent = nameInput.value;
     profileProfi.textContent = aboutInput.value;
-    closePopup(popupEditProfile);
     fetch('https://nomoreparties.co/v1/plus-cohort-23/users/me', {
         method: 'PATCH',
         headers: {
@@ -50,10 +50,14 @@ function handleEditProfileFormSubmit(evt) {
             name: nameInput.value,
             about: aboutInput.value
         })
-    })
+    }).finally(()=>{
+        closePopup(popupEditProfile);
+        popupEditProfile.querySelector('.popup__button').value = 'Сохранить';
+    });
 }
 
 function updateAvatar() {
+   popupUpdateAvatar.querySelector('.popup__button').value = 'Сохранение...';
     fetch('https://nomoreparties.co/v1/plus-cohort-23/users/me/avatar', {
             headers: {
                 authorization: 'b879d976-9451-46e7-99e2-ffc6de83a372',
@@ -66,9 +70,11 @@ function updateAvatar() {
         }).then(res => res.json())
         .then((result) => {
             console.log(result);
-        });
+        }).finally(()=>{
+            closePopup(popupUpdateAvatar);
+            popupUpdateAvatar.querySelector('.popup__button').value = 'Сохранить';
+        })
         profileAvatar.src = avatarHref.value;
-        closePopup(popupUpdateAvatar);
 }
 export {
     showPopupEditProfile,

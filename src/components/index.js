@@ -28,21 +28,22 @@ const closePopupButtonList = document.querySelectorAll('.popup__button_close'),
     profieName = document.querySelector('.profile__name'),
     profileProfi = document.querySelector('.profile__profi'),
     formUpdateAvatar = document.querySelector('#formUpdateAvatar'),
-    profileAvatar = document.querySelector('.profile__avatar');
+    profileAvatar = document.querySelector('.profile__avatar'),
+    profileAvatarBtn = document.querySelector('.profile__avatar-btn');
 formEditProfile.addEventListener('submit', handleEditProfileFormSubmit);
 formUpdateAvatar.addEventListener('submit', updateAvatar);
 closePopupButtonList.forEach(element => element.addEventListener('click', () => {
     closePopup(document.querySelector('.popup_opened'));
+    console.log('click');
 }));
 editProfileButton.addEventListener('click', showPopupEditProfile);
 addCardButton.addEventListener('click', showPopupAddCard);
 popupAddCard.addEventListener('submit', (e) => {
     e.preventDefault();
     renderCard(placeHref.value, placeName.value);
-    addCardToServer(placeHref.value, placeName.value);
+    addCardToServer(placeHref.value, placeName.value, e);
     e.target.reset();
     buttonDisabled(submitCardButton, 'popup__button_inactive');
-    closePopup(popupAddCard);
 
 });
 popupOverlayList.forEach(element => {
@@ -50,7 +51,7 @@ popupOverlayList.forEach(element => {
         closePopup(e.target);
     })
 });
-profileAvatar.addEventListener('click', ()=>{
+profileAvatarBtn.addEventListener('click', ()=>{
     openPopup(document.querySelector('.popup_update-avatar'));
 });
 enableValidation({
