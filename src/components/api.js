@@ -1,7 +1,4 @@
-import {
-    сounterLikes,
-    renderCard
-} from "./card";
+
 import {
     closePopup
 } from "./modal";
@@ -13,25 +10,19 @@ const config = {
     }
 }
 
+function getResponseData(res) {
+    if (!res.ok) {
+        return Promise.reject(`Ошибка: ${res.status}`);
+    }
+    return res.json();
+}
 const requestSetLike = (elementId) => {
     return fetch(`${config.baseUrl}/cards/likes/${elementId}`, {
             headers: config.headers,
             method: 'PUT'
+        }).then(result => {
+           return getResponseData(result);
         })
-        .then(result => {
-            if (result.ok) {
-                return result.json();
-            }
-
-            // если ошибка, отклоняем промис
-            return Promise.reject(`Ошибка: ${result.status}`);
-        })
-        .then(result => {
-            console.log(result);
-            сounterLikes(result.likes.length, result);
-        }).catch((err) => {
-            console.log(err); // выводим ошибку в консоль
-        });
 }
 
 const requestRemoveLike = (elementId) => {
@@ -40,16 +31,7 @@ const requestRemoveLike = (elementId) => {
             method: 'DELETE'
         })
         .then(result => {
-            if (result.ok) {
-                return result.json();
-            }
-
-            // если ошибка, отклоняем промис
-            return Promise.reject(`Ошибка: ${result.status}`);
-        })
-        .then(result => {
-            console.log(result);
-            сounterLikes(result.likes.length, result);
+            return getResponseData(result);
         }).catch((err) => {
             console.log(err); // выводим ошибку в консоль
         });
@@ -61,12 +43,7 @@ const requestDeleteCard = (elementId) => {
             method: 'DELETE'
         })
         .then(result => {
-            if (result.ok) {
-                return result.json();
-            }
-
-            // если ошибка, отклоняем промис
-            return Promise.reject(`Ошибка: ${result.status}`);
+            return getResponseData(result);
         }).catch((err) => {
             console.log(err); // выводим ошибку в консоль
         });
@@ -77,54 +54,32 @@ const requestGetCard = () => {
             method: 'GET'
         })
         .then(result => {
-            if (result.ok) {
-                return result.json();
-            }
-
-            // если ошибка, отклоняем промис
-            return Promise.reject(`Ошибка: ${result.status}`);
+            return getResponseData(result);
         })
-        .then(result => {
-            result.forEach(element => {
-                renderCard(element.link, element.name, element._id, element.owner._id);
-                сounterLikes(element.likes.length, element);
-            })
-        }).catch((err) => {
+        .catch((err) => {
             console.log(err); // выводим ошибку в консоль
         });
 }
-const requestPostCard = (nameValue, srcValue, popupAddCard) => {
+const requestPostCard = (nameValue, srcValue) => {
     return fetch(`${config.baseUrl}/cards/`, {
         headers: config.headers,
         method: 'POST',
         body: JSON.stringify({
             name: nameValue,
             link: srcValue
-        }),
-    }).then(() => {
-        popupAddCard.querySelector('.popup__button').value = 'Сохранить';
+        })
+    }).then(result => {
+        return getResponseData(result);
     }).catch((err) => {
         console.log(err); // выводим ошибку в консоль
-    }).finally(() => {
-        closePopup(popupAddCard);
-    });
+    })
 }
-const requestUserInfo = (profieName, profileProfi, profileAvatar) => {
+const requestUserInfo = () => {
     return fetch(`${config.baseUrl}/users/me`, {
             headers: config.headers,
             method: 'GET'
         }).then(result => {
-            if (result.ok) {
-                return result.json();
-            }
-
-            // если ошибка, отклоняем промис
-            return Promise.reject(`Ошибка: ${result.status}`);
-        })
-        .then((result) => {
-            profieName.textContent = result.name;
-            profileProfi.textContent = result.about;
-            profileAvatar.src = result.avatar;
+            return getResponseData(result);
         }).catch((err) => {
             console.log(err); // выводим ошибку в консоль
         });
@@ -141,6 +96,12 @@ const requestPathInfo = (value, popup, url) => {
         popup.querySelector('.popup__button').value = 'Сохранить';
     });
 }
+Promise.all([                 //в Promise.all передаем массив промисов которые нужно выполнить
+    requestUserInfo(),
+    requestGetCard()
+]).catch((err)=>{             //попадаем сюда если один из промисов завершится ошибкой
+console.log(err);
+ })
 export {
     requestSetLike,
     requestRemoveLike,

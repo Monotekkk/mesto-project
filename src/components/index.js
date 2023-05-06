@@ -4,7 +4,6 @@ import {
     buttonDisabled
 } from './validate.js';
 import {
-    renderCard,
     renderInitalCard,
     addCardToServer,
 } from './card';
@@ -43,7 +42,6 @@ editProfileButton.addEventListener('click', showPopupEditProfile);
 addCardButton.addEventListener('click', showPopupAddCard);
 popupAddCard.addEventListener('submit', (e) => {
     e.preventDefault();
-    renderCard(placeHref.value, placeName.value);
     addCardToServer(placeHref.value, placeName.value, e);
     e.target.reset();
     buttonDisabled(submitCardButton, 'popup__button_inactive');
@@ -65,5 +63,9 @@ enableValidation({
     inputErrorClass: 'popup__input_type_error',
     errorClass: 'popup__error_visible'
 });
-renderInitalCard();
-requestUserInfo(profieName, profileProfi, profileAvatar);
+requestUserInfo().then((result) => {
+    profieName.textContent = result.name;
+    profileProfi.textContent = result.about;
+    profileAvatar.src = result.avatar;
+    renderInitalCard(result._id);
+})
