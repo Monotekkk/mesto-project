@@ -32,9 +32,7 @@ const requestRemoveLike = (elementId) => {
         })
         .then(result => {
             return getResponseData(result);
-        }).catch((err) => {
-            console.log(err); // выводим ошибку в консоль
-        });
+        })
 }
 
 const requestDeleteCard = (elementId) => {
@@ -43,10 +41,9 @@ const requestDeleteCard = (elementId) => {
             method: 'DELETE'
         })
         .then(result => {
+            console.log(result);
             return getResponseData(result);
-        }).catch((err) => {
-            console.log(err); // выводим ошибку в консоль
-        });
+        })
 }
 const requestGetCard = () => {
     return fetch(`https://mesto.nomoreparties.co/v1/plus-cohort-23/cards`, {
@@ -56,9 +53,6 @@ const requestGetCard = () => {
         .then(result => {
             return getResponseData(result);
         })
-        .catch((err) => {
-            console.log(err); // выводим ошибку в консоль
-        });
 }
 const requestPostCard = (nameValue, srcValue) => {
     return fetch(`${config.baseUrl}/cards/`, {
@@ -70,8 +64,6 @@ const requestPostCard = (nameValue, srcValue) => {
         })
     }).then(result => {
         return getResponseData(result);
-    }).catch((err) => {
-        console.log(err); // выводим ошибку в консоль
     })
 }
 const requestUserInfo = () => {
@@ -80,21 +72,14 @@ const requestUserInfo = () => {
             method: 'GET'
         }).then(result => {
             return getResponseData(result);
-        }).catch((err) => {
-            console.log(err); // выводим ошибку в консоль
-        });
+        })
 }
 const requestPathInfo = (value, popup, url) => {
     return fetch(`${config.baseUrl}/${url}`, {
         method: 'PATCH',
         headers: config.headers,
         body: JSON.stringify(value)
-    }).catch((err) => {
-        console.log(err); // выводим ошибку в консоль
-    }).finally(() => {
-        closePopup(popup);
-        popup.querySelector('.popup__button').value = 'Сохранить';
-    });
+    })
 }
 Promise.all([                 //в Promise.all передаем массив промисов которые нужно выполнить
     requestUserInfo(),

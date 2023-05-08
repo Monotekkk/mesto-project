@@ -43,48 +43,29 @@ function handleEditProfileFormSubmit(evt) {
     popupEditProfile.querySelector('.popup__button').value = 'Сохранение...';
     profieName.textContent = nameInput.value;
     profileProfi.textContent = aboutInput.value;
-    // fetch('https://nomoreparties.co/v1/plus-cohort-23/users/me', {
-    //     method: 'PATCH',
-    //     headers: {
-    //         authorization: 'b879d976-9451-46e7-99e2-ffc6de83a372',
-    //         'Content-Type': 'application/json'
-    //     },
-    //     body: JSON.stringify({
-    //         name: nameInput.value,
-    //         about: aboutInput.value
-    //     })
-    // }).finally(()=>{
-    //     closePopup(popupEditProfile);
-    //     popupEditProfile.querySelector('.popup__button').value = 'Сохранить';
-    // });
     requestPathInfo({
         name: nameInput.value,
         about: aboutInput.value
-    }, popupEditProfile, 'users/me');
+    }, popupEditProfile, 'users/me').catch((err) => {
+        console.log(err); // выводим ошибку в консоль
+    }).finally(() => {
+        closePopup(popup);
+        popup.querySelector('.popup__button').value = 'Сохранить';
+    });
 }
 
 function updateAvatar() {
     popupUpdateAvatar.querySelector('.popup__button').value = 'Сохранение...';
-    // fetch('https://nomoreparties.co/v1/plus-cohort-23/users/me/avatar', {
-    //         headers: {
-    //             authorization: 'b879d976-9451-46e7-99e2-ffc6de83a372',
-    //             'Content-Type': 'application/json'
-    //         },
-    //         method: 'PATCH',
-    //         body: JSON.stringify({
-    //             avatar: avatarHref.value
-    //         })
-    //     }).then(res => res.json())
-    //     .then((result) => {
-    //         console.log(result);
-    //     }).finally(() => {
-    //         closePopup(popupUpdateAvatar);
-    //         popupUpdateAvatar.querySelector('.popup__button').value = 'Сохранить';
-    //     })
     requestPathInfo({
         avatar: avatarHref.value
-    }, popupUpdateAvatar, 'users/me/avatar');
-    profileAvatar.src = avatarHref.value;
+    }, popupUpdateAvatar, 'users/me/avatar').catch((err) => {
+        console.log(err); // выводим ошибку в консоль
+    }).finally(() => {
+        closePopup(popup);
+        popup.querySelector('.popup__button').value = 'Сохранить';
+        profileAvatar.src = avatarHref.value;
+    });
+
 }
 export {
     showPopupEditProfile,

@@ -1,7 +1,6 @@
 import '../pages/index.css';
 import {
     enableValidation,
-    buttonDisabled
 } from './validate.js';
 import {
     renderInitalCard,
@@ -16,6 +15,7 @@ import {
     updateAvatar
 } from './modal';
 import {
+    requestGetCard,
     requestUserInfo
 } from './api';
 const closePopupButtonList = document.querySelectorAll('.popup__button_close'),
@@ -34,17 +34,18 @@ const closePopupButtonList = document.querySelectorAll('.popup__button_close'),
     profileAvatarBtn = document.querySelector('.profile__avatar-button');
 formEditProfile.addEventListener('submit', handleEditProfileFormSubmit);
 formUpdateAvatar.addEventListener('submit', updateAvatar);
-closePopupButtonList.forEach(element => element.addEventListener('click', () => {
+closePopupButtonList.forEach(element => element.addEventListener('click', (e) => {
     closePopup(document.querySelector('.popup_opened'));
-    console.log('click');
+
 }));
 editProfileButton.addEventListener('click', showPopupEditProfile);
 addCardButton.addEventListener('click', showPopupAddCard);
 popupAddCard.addEventListener('submit', (e) => {
     e.preventDefault();
-    addCardToServer(placeHref.value, placeName.value, e);
-    e.target.reset();
-    buttonDisabled(submitCardButton, 'popup__button_inactive');
+    addCardToServer({
+        placeHref: placeHref.value,
+        placeName: placeName.value
+    }, e)
 
 });
 popupOverlayList.forEach(element => {
@@ -63,9 +64,16 @@ enableValidation({
     inputErrorClass: 'popup__input_type_error',
     errorClass: 'popup__error_visible'
 });
-requestUserInfo().then((result) => {
-    profieName.textContent = result.name;
-    profileProfi.textContent = result.about;
-    profileAvatar.src = result.avatar;
-    renderInitalCard(result._id);
-})
+Promise.all([ //в Promise.all передаем массив промисов которые нужно выполнить
+        requestUserInfo(),
+        requestGetCard()
+    ])
+    .then(([info, initialCards]) => { //попадаем сюда, когда оба промиса будут выполнены, деструктурируем ответ
+        profieName.textContent = info.name;
+        profileProfi.textContent = info.about;
+        profileAvatar.src = info.avatar;
+        renderInitalCard(initialCards,info._id); //все данные получены, отрисовываем страницу
+    })
+    .catch((err) => { //попадаем сюда если один из промисов завершится ошибкой
+        console.log(err);
+    })
