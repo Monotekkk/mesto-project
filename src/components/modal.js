@@ -41,12 +41,14 @@ function showPopupAddCard() {
 function handleEditProfileFormSubmit(evt) {
     evt.preventDefault();
     popupEditProfile.querySelector('.popup__button').value = 'Сохранение...';
-    profieName.textContent = nameInput.value;
-    profileProfi.textContent = aboutInput.value;
     requestPathInfo({
         name: nameInput.value,
         about: aboutInput.value
-    }, popupEditProfile, 'users/me').catch((err) => {
+    }, popupEditProfile, 'users/me').then(()=>{
+        profieName.textContent = nameInput.value;
+        profileProfi.textContent = aboutInput.value;
+    })
+    .catch((err) => {
         console.log(err); // выводим ошибку в консоль
     }).finally(() => {
         closePopup(popup);
@@ -58,12 +60,14 @@ function updateAvatar() {
     popupUpdateAvatar.querySelector('.popup__button').value = 'Сохранение...';
     requestPathInfo({
         avatar: avatarHref.value
-    }, popupUpdateAvatar, 'users/me/avatar').catch((err) => {
+    }, popupUpdateAvatar, 'users/me/avatar').then(()=>{
+        profileAvatar.src = avatarHref.value;
+    })
+    .catch((err) => {
         console.log(err); // выводим ошибку в консоль
     }).finally(() => {
         closePopup(popup);
         popup.querySelector('.popup__button').value = 'Сохранить';
-        profileAvatar.src = avatarHref.value;
     });
 
 }

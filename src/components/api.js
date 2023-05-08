@@ -1,7 +1,3 @@
-
-import {
-    closePopup
-} from "./modal";
 const config = {
     baseUrl: 'https://nomoreparties.co/v1/plus-cohort-23',
     headers: {
@@ -84,9 +80,7 @@ const requestPathInfo = (value, popup, url) => {
 Promise.all([                 //в Promise.all передаем массив промисов которые нужно выполнить
     requestUserInfo(),
     requestGetCard()
-]).catch((err)=>{             //попадаем сюда если один из промисов завершится ошибкой
-console.log(err);
- })
+])
 export {
     requestSetLike,
     requestRemoveLike,

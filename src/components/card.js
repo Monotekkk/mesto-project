@@ -10,7 +10,7 @@ import {
 } from "./api";
 import {
     buttonDisabled
-}from "./validate";
+} from "./validate";
 const imagePlace = document.querySelector('.popup__image'),
     imagePlaceTitle = document.querySelector('.popup__title_image'),
     elementsContainer = document.querySelector('.elements'),
@@ -33,8 +33,8 @@ function addElement(srcValue, nameValue, elementId, owner, likes = 0, myID) {
     elementImage.alt = nameValue;
     element.querySelector('.element__attractions').textContent = nameValue;
     element.querySelector('.element__likes').textContent = likes.length;
-    likes.forEach((users)=>{
-        if(users._id == myID){
+    likes.forEach((users) => {
+        if (users._id == myID) {
             element.querySelector('.element__like').classList.add('element__like_active');
         }
     })
@@ -42,7 +42,7 @@ function addElement(srcValue, nameValue, elementId, owner, likes = 0, myID) {
         if (e.target.classList.contains('element__like_active')) {
             requestRemoveLike(elementId)
                 .then(result => {
-                    element.querySelector('.element__likes').textContent -= 1;
+                    element.querySelector('.element__likes').textContent = result.likes.length;
                     //сounterLikes(result.likes.length, result, result.owner._id, element);
                     e.target.classList.remove('element__like_active');
                 }).catch((err) => {
@@ -50,7 +50,7 @@ function addElement(srcValue, nameValue, elementId, owner, likes = 0, myID) {
                 })
         } else {
             requestSetLike(elementId).then(result => {
-                element.querySelector('.element__likes').textContent =   +(element.querySelector('.element__likes').textContent) +1;
+                element.querySelector('.element__likes').textContent = result.likes.length;
                 //сounterLikes(result.likes.length, result, result.owner._id, element);
             }).then(() => {
                 e.target.classList.add('element__like_active');
@@ -71,12 +71,12 @@ function addElement(srcValue, nameValue, elementId, owner, likes = 0, myID) {
 }
 
 function deleteCard(element, elementId) {
-        requestDeleteCard(elementId).then(()=>{
-            element.remove()
-        }).catch((err) => {
-            console.log(err); // выводим ошибку в консоль
-        });
-         //обратиться к карточке по ид
+    requestDeleteCard(elementId).then(() => {
+        element.remove()
+    }).catch((err) => {
+        console.log(err); // выводим ошибку в консоль
+    });
+    //обратиться к карточке по ид
 }
 
 function renderCard(element, myID) {
@@ -93,19 +93,21 @@ function сounterLikes(count, cardID, myID, element) {
 }
 
 function renderInitalCard(cards, myID) {
-        cards.forEach(element => {
-            renderCard(element, myID);
-        })}
+    cards.forEach(element => {
+        renderCard(element, myID);
+    })
+}
 
 function addCardToServer(element, e) {
     popupAddCard.querySelector('.popup__button').value = 'Сохранение...';
     requestPostCard(element.placeName, element.placeHref).then((result) => {
             renderCard(result, result.owner._id);
-            popupAddCard.querySelector('.popup__button').value = 'Сохранить';
-        }).finally(() => {
-            closePopup(popupAddCard);
             e.target.reset();
             buttonDisabled(submitCardButton, 'popup__button_inactive');
+            closePopup(popupAddCard);
+
+        }).finally(() => {
+            popupAddCard.querySelector('.popup__button').value = 'Сохранить';
         })
         .catch((err) => {
             console.log(err); // выводим ошибку в консоль
