@@ -47,11 +47,11 @@ function handleEditProfileFormSubmit(evt) {
     }, popupEditProfile, 'users/me').then(()=>{
         profieName.textContent = nameInput.value;
         profileProfi.textContent = aboutInput.value;
+        closePopup(popup);
     })
     .catch((err) => {
         console.log(err); // выводим ошибку в консоль
     }).finally(() => {
-        closePopup(popup);
         popup.querySelector('.popup__button').value = 'Сохранить';
     });
 }
@@ -62,11 +62,11 @@ function updateAvatar() {
         avatar: avatarHref.value
     }, popupUpdateAvatar, 'users/me/avatar').then(()=>{
         profileAvatar.src = avatarHref.value;
+        closePopup(popup);
     })
     .catch((err) => {
         console.log(err); // выводим ошибку в консоль
     }).finally(() => {
-        closePopup(popup);
         popup.querySelector('.popup__button').value = 'Сохранить';
     });
 

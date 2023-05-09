@@ -106,12 +106,12 @@ function addCardToServer(element, e) {
             buttonDisabled(submitCardButton, 'popup__button_inactive');
             closePopup(popupAddCard);
 
-        }).finally(() => {
+        }).catch((err) => {
+            console.log(err); // выводим ошибку в консоль
+        })
+        .finally(() => {
             popupAddCard.querySelector('.popup__button').value = 'Сохранить';
         })
-        .catch((err) => {
-            console.log(err); // выводим ошибку в консоль
-        });
 
 }
 export {
