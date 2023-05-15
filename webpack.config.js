@@ -10,7 +10,7 @@ module.exports = {
   output: {
     path: path.resolve(__dirname, 'dist'),
     filename: 'main.js',
-    publicPath: './src/',
+    publicPath: '',
   },
   mode: 'development',
   devServer: {
