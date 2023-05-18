@@ -43,7 +43,7 @@ function addElement(srcValue, nameValue, elementId, owner, likes = 0, myID) {
             requestRemoveLike(elementId)
                 .then(result => {
                     element.querySelector('.element__likes').textContent = result.likes.length;
-                    //сounterLikes(result.likes.length, result, result.owner._id, element);
+                    //counterLikes(result.likes.length, result, result.owner._id, element);
                     e.target.classList.remove('element__like_active');
                 }).catch((err) => {
                     console.log(err);
@@ -64,7 +64,7 @@ function addElement(srcValue, nameValue, elementId, owner, likes = 0, myID) {
     } else {
         element.querySelector('.element__trash').classList.add('element__trash_hidden');
     }
-    element.querySelector('.element__image').addEventListener('click', function (e) {
+    element.querySelector('.element__image').addEventListener('click', function () {
         increaseImage(srcValue, nameValue);
     });
     return element;

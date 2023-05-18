@@ -47,12 +47,12 @@ function handleEditProfileFormSubmit(evt) {
     }, popupEditProfile, 'users/me').then(()=>{
         profieName.textContent = nameInput.value;
         profileProfi.textContent = aboutInput.value;
-        closePopup(popup);
+        closePopup(popupEditProfile);
     })
     .catch((err) => {
         console.log(err); // выводим ошибку в консоль
     }).finally(() => {
-        popup.querySelector('.popup__button').value = 'Сохранить';
+        popupEditProfile.querySelector('.popup__button').value = 'Сохранить';
     });
 }
 
