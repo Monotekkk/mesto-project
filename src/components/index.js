@@ -72,6 +72,7 @@ Promise.all([ //в Promise.all передаем массив промисов к
         profieName.textContent = info.name;
         profileProfi.textContent = info.about;
         profileAvatar.src = info.avatar;
+        initialCards.reverse();
         renderInitalCard(initialCards,info._id); //все данные получены, отрисовываем страницу
     })
     .catch((err) => { //попадаем сюда если один из промисов завершится ошибкой

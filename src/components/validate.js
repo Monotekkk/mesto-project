@@ -15,8 +15,7 @@ function hideInputError(formElement, inputElement, values) {
 
 function isValid(formElement, inputElement, values) {
     if (inputElement.validity.patternMismatch) {
-        console.log(values);
-        inputElement.setCustomValidity(inputItem.dataset.errorMessage);
+        inputElement.setCustomValidity(inputElement.dataset.errorMessage);
     } else {
         inputElement.setCustomValidity("");
     }

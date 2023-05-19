@@ -5,9 +5,6 @@ const config = {
         'Content-Type': 'application/json'
     }
 }
-class Api{
-
-}
 function getResponseData(res) {
     if (!res.ok) {
         return Promise.reject(`Ошибка: ${res.status}`);

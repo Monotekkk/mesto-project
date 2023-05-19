@@ -62,12 +62,12 @@ function updateAvatar() {
         avatar: avatarHref.value
     }, popupUpdateAvatar, 'users/me/avatar').then(()=>{
         profileAvatar.src = avatarHref.value;
-        closePopup(popup);
+        closePopup(popupUpdateAvatar);
     })
     .catch((err) => {
         console.log(err); // выводим ошибку в консоль
     }).finally(() => {
-        popup.querySelector('.popup__button').value = 'Сохранить';
+        popupUpdateAvatar.querySelector('.popup__button').value = 'Сохранить';
     });
 
 }

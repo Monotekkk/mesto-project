@@ -39,12 +39,12 @@
             <form class="popup__form" action="editProfile" name="formEditProfile" id="formEditProfile" novalidate>
                 <fieldset class="popup__field">
                     <input class="popup__input" id="name-input" type="text" placeholder="Имя" name="name" minlength="2"
-                        maxlength="40" pattern="^[a-zA-Zа-яА-ЯЁё -]+$" required>
+                        maxlength="40" pattern="^[a-zA-Zа-яА-ЯЁё -]+$" data-error-message="Разрешены только латинские, кириллические буквы, знаки дефиса и пробелы" required>
                     <span class="name-input-error popup__input-error"></span>
                 </fieldset>
                 <fieldset class="popup__field">
                     <input class="popup__input" id="about-input" type="text" placeholder="О себе" name="about"
-                        minlength="2" maxlength="200" pattern="^[a-zA-Zа-яА-ЯЁё -]+$" required>
+                        minlength="2" maxlength="200" pattern="^[a-zA-Zа-яА-ЯЁё -]+$" data-error-message="Разрешены только латинские, кириллические буквы, знаки дефиса и пробелы" required>
                     <span class="about-input-error popup__input-error"></span>
                 </fieldset>
                 <input class='popup__button' value="Сохранить" type="submit">
